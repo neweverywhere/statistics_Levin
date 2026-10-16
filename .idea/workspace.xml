@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a819d0fc-550d-491f-9ef6-17f29084b4ff" name="Changes" comment="test commit 2nd">
-      <change afterPath="$PROJECT_DIR$/src/statistics_project/check_undependence.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/statistics_project/graphics.py" afterDir="false" />
+    <list default="true" id="a819d0fc-550d-491f-9ef6-17f29084b4ff" name="Changes" comment="added dataset, added graphics.py, starting to check undependence">
+      <change afterPath="$PROJECT_DIR$/src/statistics_project/EDA.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/statistics_project/sample_set.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/statistics_project/standartise.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/statistics_project/dataset_injection.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/statistics_project/dataset_injection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/statistics_project/check_undependence.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/statistics_project/check_undependence.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/statistics_project/graphics.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/statistics_project/graphics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/statistics_project/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/statistics_project/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,21 +28,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "neweverywhere"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;neweverywhere&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/neweverywhere/statistics_Levin.git",
-    "accountId": "92ccd19e-2006-4bba-94bd-a31b5c7f8233"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/neweverywhere/statistics_Levin.git&quot;,
+    &quot;accountId&quot;: &quot;92ccd19e-2006-4bba-94bd-a31b5c7f8233&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="3KXgMLO0SJ8RnkYz08Fi4vevkX5" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -52,8 +54,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.EDA.executor": "Run",
+    "Python.check_undependence.executor": "Run",
     "Python.dataset_injection.executor": "Run",
+    "Python.graphics.executor": "Run",
     "Python.main.executor": "Run",
+    "Python.sample_set.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -106,12 +112,32 @@
       <option name="project" value="LOCAL" />
       <updated>1791711149501</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added dataset, added graphics.py, starting to check undependence">
+      <option name="closed" value="true" />
+      <created>1791724297569</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1791724297569</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first test commit" />
     <MESSAGE value="test commit 2nd" />
-    <option name="LAST_COMMIT_MESSAGE" value="test commit 2nd" />
+    <MESSAGE value="added dataset, added graphics.py, starting to check undependence" />
+    <option name="LAST_COMMIT_MESSAGE" value="added dataset, added graphics.py, starting to check undependence" />
   </component>
 </project>
