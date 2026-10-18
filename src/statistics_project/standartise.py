@@ -10,7 +10,7 @@ def min_max_std(df:pd.DataFrame, param:str): #стоковая стандарт�
 
 def mean_std(df:pd.DataFrame, param:str): # -> {-1 0 1} я так понял, что это нормировка по умолчанию в М.стат
     mean = df[param].mean()
-    df[param+"_mean-std"] = df[param].apply(lambda x: (x-mean/(df[param].std())))
+    df[param+"_mean-std"] = df[param].apply(lambda x: ((x-mean)/(df[param].std())))
     print(param+" mean standartised")
-    print(f"new column = {param}+_mean-std")
+    print(f"new column = {param}_mean-std")
 

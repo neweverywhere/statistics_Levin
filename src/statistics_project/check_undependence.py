@@ -27,7 +27,7 @@ def checkMI(data_frDF:pd.DataFrame, first:str, second: str):
     x = data_frDF[first].to_numpy()
     y = data_frDF[second].to_numpy()
 
-    # Число бинов: ~sqrt(N). max(5, ...) — страховка, если данных мало.
+    #число бинов: ~sqrt(N). max(5, ...) — страховка, если данных мало.
     bins = max(5, int(np.sqrt(len(x))))
     bins = max(5, int(len(x)**0.4))
 
