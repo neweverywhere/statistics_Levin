@@ -1,8 +1,7 @@
 import pandas as pd
-from IPython.core.display_functions import display
-from IPython.core.display import display_html
+from IPython.display import display, display_html
 
-from src.statistics_project import graphics
+from . import graphics
 
 hw01version = "0.1"
 

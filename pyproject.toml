@@ -7,6 +7,7 @@ name = "statistics_levin"
 version = "0.1.0"
 description = "main math modules and descriptions of how work was going"
 requires-python = ">=3.8"
-
+[tool.setuptools.package-data]
+statistics_project = ["*.xlsx"]
 [tool.setuptools.packages.find]
 where = ["src"]

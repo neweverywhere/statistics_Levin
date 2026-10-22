@@ -1,5 +1,5 @@
 import dataset_injection
-from src.statistics_project import math_model, graphics, check_undependence
+from . import math_model, graphics, check_undependence, EDA
 
 df = dataset_injection.fileLoad('pyrovskytes.xlsx')
 df = df[df['Bond length of B-O'] > 0.1]
@@ -27,15 +27,15 @@ df = df[df['Bond length of A-O'] > 0.1]
 сделать частную выборку, взять по ней частную EDA и сравнить с исходной, нормировка и стандартизация
 
 '''
-#EDA.do_EDA(df)
+EDA.do_EDA(df)
 
 
 #graphics.points_on_X(df,'Bond length of A-O','Bond length of B-O')
 #print(check_undependence.checkP(df, 'Bond length of A-O', 'r(AVI)'))
-set = ('r(AVI)','Bond length of A-O',"EN(B)","EN(A)", "ionic radius of A")
-for i in set:
-    print(f"check dependence of {i} and bond length of B-O")
-    print(check_undependence.checkMI(df, i, 'Bond length of B-O'))
+#set = ('r(AVI)','Bond length of A-O',"EN(B)","EN(A)", "ionic radius of A")
+#for i in set:
+#    print(f"check dependence of {i} and bond length of B-O")
+#    print(check_undependence.checkMI(df, i, 'Bond length of B-O'))
 #print(check_undependence.checkMI(df, 'r(AVI)', 'Bond length of B-O'))
 #TODO: рассмотреть попарной сверки со всеми параметтрами? -очень долго считается, В КОНЦЕ
 #TODO: добавить вторую проверку независимости, т.к. может не увидеть y=x^2

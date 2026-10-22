@@ -1,8 +1,7 @@
 import pandas as pd
 from sklearn.mixture import GaussianMixture
-import numpy as np
 
-from src.statistics_project import graphics
+from . import graphics
 
 
 def check_multinormal_model(df:pd.DataFrame,*, param:str,components:int = 1, autoBIC:bool = False,description:str = ""):
