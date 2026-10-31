@@ -1,5 +1,5 @@
 import dataset_injection
-from . import EDA, check_undependence, math_model, graphics
+from src.statistics_project import math_model
 
 df = dataset_injection.fileLoad('pyrovskytes.xlsx')
 df = df[df['Bond length of B-O'] > 0.1]

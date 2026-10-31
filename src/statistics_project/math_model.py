@@ -26,8 +26,8 @@ def check_multinormal_model(df:pd.DataFrame,*, param:str,components:int = 1, aut
 
     x = df[param].values.reshape(-1, 1)
     gm = GaussianMixture(n_components=components, random_state=42).fit(x)
-    lines_list = list(map(lambda x: round(x,2),gm.means_.flatten()))
-    round_list = lambda x: list(map(lambda y: round(y,2),x))
+    round_list = lambda x: list(map(lambda y: round(float(y),2),x))
+    lines_list = round_list(gm.means_.flatten())
     print(f"Средние компонент: {lines_list}")
     print(f"Дисперсии: {round_list(gm.covariances_.flatten())}")
     print(f"Веса: {round_list(gm.weights_)}")
