@@ -8,7 +8,7 @@ def make_histplot(data_frDF:pd.DataFrame, x_name:str, *, description:str= "",bin
     sns.histplot(data=data_frDF,x=x_name,kde=True,ax=axes, bins=bins)
     axes.set_title(f"Распределение {x_name}")
     axes.set_xlabel(description)
-    axes.set_ylabel(x_name)
+    axes.set_ylabel("количество")
     if kwargs:
         for k,v in kwargs.items():
             axes.axvline(v, color="crimson", linestyle="--", linewidth=1,

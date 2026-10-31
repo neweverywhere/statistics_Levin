@@ -68,6 +68,9 @@ df = df[df['Bond length of A-O'] > 0.1]
 #    math_model.bic_in_multinormal_model(df[df["B Valence"] == i], 'Bond length of B-O',description=f"B Valence = {str(i)}")
 #    graphics.make_histplot(df[df["B Valence"] == i],'Bond length of B-O',bins = 20,description=f"Bval = {i}")
 #    pass
+#math_model.bic_in_multinormal_model(df[df["B Valence"] == -1],
+#                                    'Bond length of B-O',description=f"B Valence = {str(-1)}",
+#                                    search_range=25,giveDiff=True)
 '''
 для каждой валентности B-O:
 bic_res_BO={-1=5,0=2,1=6,2=6,3=5,4=3,5=4}

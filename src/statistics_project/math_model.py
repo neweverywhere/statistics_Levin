@@ -36,15 +36,19 @@ def check_multinormal_model(df:pd.DataFrame,*, param:str,components:int = 1, aut
     graphics.make_histplot(df, param, bins=bins, description=description,**lines)
 
 
-def bic_in_multinormal_model(df:pd.DataFrame, param:str,*,description:str = ""):
+def bic_in_multinormal_model(df:pd.DataFrame, param:str,*,description:str = "",search_range:int = 10, giveDiff:bool = False):
     print("===="*20)
     if description != "": print(description.center(80, "="))
     print("===="*20+"\n")
     x = df[param].values.reshape(-1, 1)
     # Чтобы понять, сколько компонент нужно, сравним BIC:
     result = {}
-    for k in range(1,10):
+    for k in range(1,search_range):
         gm = GaussianMixture(n_components=k, random_state=42).fit(x)
         result[k]=gm.bic(x)
+        if giveDiff:
+            if k>1:
+                print(f"components={k}: BIC = {gm.bic(x):.2f}     {chr(8710)}BIC = {result[k-1]-result[k]:.2f}")
+                continue
         print(f"components={k}: BIC = {gm.bic(x):.2f}")
     return result
