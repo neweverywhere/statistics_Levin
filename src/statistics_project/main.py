@@ -1,5 +1,5 @@
 import dataset_injection
-from . import math_model, graphics, check_undependence, EDA
+from . import EDA, check_undependence, math_model, graphics
 
 df = dataset_injection.fileLoad('pyrovskytes.xlsx')
 df = df[df['Bond length of B-O'] > 0.1]
@@ -11,7 +11,7 @@ df = df[df['Bond length of A-O'] > 0.1]
 #print(df["EN(B)"].describe())
 #print(df["Electronegativity difference with radius"].unique())
 #for i in range(7):
-#    #graphics.common_plt(df[df["B Valence"] == i-1], 'Bond length of B-O',desctiption="B valence = "+str(i-1))
+#    graphics.common_plt(df[df["B Valence"] == i-1], 'Bond length of B-O',description="B valence = "+str(i-1))
 #    EDA.EDA_one_param(df[df["B Valence"] == i-1], 'Bond length of B-O',description=(" Bval = "+str(i-1)))
 #    pass
 
@@ -27,11 +27,11 @@ df = df[df['Bond length of A-O'] > 0.1]
 сделать частную выборку, взять по ней частную EDA и сравнить с исходной, нормировка и стандартизация
 
 '''
-EDA.do_EDA(df)
+#EDA.do_EDA(df)
 
 
 #graphics.points_on_X(df,'Bond length of A-O','Bond length of B-O')
-#print(check_undependence.checkP(df, 'Bond length of A-O', 'r(AVI)'))
+#print(check_undependence.check_R(df, 'Bond length of A-O', 'r(AVI)'))
 #set = ('r(AVI)','Bond length of A-O',"EN(B)","EN(A)", "ionic radius of A")
 #for i in set:
 #    print(f"check dependence of {i} and bond length of B-O")
@@ -65,7 +65,7 @@ EDA.do_EDA(df)
 #math_model.bic_in_multinormal_model(df[df["B Valence"] == 4], 'Bond length of B-O',description="B Valence = 4")
 
 #for i in range(-1,6):  #переберём валентности
-#    #math_model.bic_in_multinormal_model(df[df["B Valence"] == i], 'Bond length of B-O',description=f"B Valence = {str(i)}")
+#    math_model.bic_in_multinormal_model(df[df["B Valence"] == i], 'Bond length of B-O',description=f"B Valence = {str(i)}")
 #    graphics.make_histplot(df[df["B Valence"] == i],'Bond length of B-O',bins = 20,description=f"Bval = {i}")
 #    pass
 '''
@@ -74,12 +74,12 @@ bic_res_BO={-1=5,0=2,1=6,2=6,3=5,4=3,5=4}
 или списком: [5,2,6,6,5,3,4]
 '''
 #bic_res_BO={-1:5,
-#            0:2,
-#            1:6,
-#            2:6,
-#            3:5,
-#            4:3,
-#            5:4}
+#            0 :2,
+#            1 :6,
+#            2 :6,
+#            3 :5,
+#            4 :3,
+#            5 :4}
 #for val,comp in bic_res_BO.items():
 #    math_model.check_multinormal_model(df[df["B Valence"] == val],param='Bond length of B-O',components=comp,
 #                                       autoBIC=False,description=f"Bval = {val}")
