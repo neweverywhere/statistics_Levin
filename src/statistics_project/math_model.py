@@ -4,7 +4,8 @@ from sklearn.mixture import GaussianMixture
 from . import graphics
 
 
-def check_multinormal_model(df:pd.DataFrame,*, param:str,components:int = 1, autoBIC:bool = False,description:str = "",bins:int = 20):
+def check_multinormal_model(df:pd.DataFrame,*, param:str,components:int = 1, autoBIC:bool = False,
+                            description:str = "",bins:int = 20,roundDig:int =2):
 
     if autoBIC:
         result = bic_in_multinormal_model(df,param)
@@ -26,7 +27,7 @@ def check_multinormal_model(df:pd.DataFrame,*, param:str,components:int = 1, aut
 
     x = df[param].values.reshape(-1, 1)
     gm = GaussianMixture(n_components=components, random_state=42).fit(x)
-    round_list = lambda x: list(map(lambda y: round(float(y),2),x))
+    round_list = lambda x: list(map(lambda y: round(float(y),roundDig),x))
     lines_list = round_list(gm.means_.flatten())
     print(f"Средние компонент: {lines_list}")
     print(f"Дисперсии: {round_list(gm.covariances_.flatten())}")
@@ -36,7 +37,8 @@ def check_multinormal_model(df:pd.DataFrame,*, param:str,components:int = 1, aut
     graphics.make_histplot(df, param, bins=bins, description=description,**lines)
 
 
-def bic_in_multinormal_model(df:pd.DataFrame, param:str,*,description:str = "",search_range:int = 10, giveDiff:bool = False):
+def bic_in_multinormal_model(df:pd.DataFrame, param:str,*,description:str = "",search_range:int = 10,
+                             giveDiff:bool = False, roundDig:int =2):
     print("===="*20)
     if description != "": print(description.center(80, "="))
     print("===="*20+"\n")
@@ -45,10 +47,16 @@ def bic_in_multinormal_model(df:pd.DataFrame, param:str,*,description:str = "",s
     result = {}
     for k in range(1,search_range):
         gm = GaussianMixture(n_components=k, random_state=42).fit(x)
-        result[k]=gm.bic(x)
+        BIC=round(float(gm.bic(x)),roundDig)
         if giveDiff:
             if k>1:
-                print(f"components={k}: BIC = {gm.bic(x):.2f}     {chr(8710)}BIC = {result[k-1]-result[k]:.2f}")
-                continue
-        print(f"components={k}: BIC = {gm.bic(x):.2f}")
+                result[k] = (BIC,round(result[k-1][0] - BIC,roundDig))
+                print(f"components={k}: BIC = {BIC:.2f}     {chr(8710)}BIC = {result[k-1][0]-result[k][0]:.2f}")
+            if k==1:
+                result[k] = (BIC,0)
+                print(f"components={k}: BIC = {BIC:.2f}")
+
+        else:
+            result[k] = BIC
+            print(f"components={k}: BIC = {BIC:.2f}")
     return result
