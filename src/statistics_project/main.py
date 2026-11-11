@@ -1,5 +1,5 @@
 import dataset_injection
-from src.statistics_project import math_model
+from src.statistics_project import math_model, graphics
 
 df = dataset_injection.fileLoad('pyrovskytes.xlsx')
 df = df[df['Bond length of B-O'] > 0.1]
@@ -43,8 +43,8 @@ df = df[df['Bond length of A-O'] > 0.1]
 
 #BO_EDA = EDA.EDA_one_param(df,'Bond length of B-O')
 #graphics.common_plt(df, 'Bond length of B-O')
-#graphics.make_histplot(df[df['Bond length of B-O']>0.1],'Bond length of B-O')
-#graphics.make_histplot(df[df['Bond length of B-O']>0.1],'Bond length of A-O')
+#graphics.make_histplot(df,'Bond length of B-O',description="Bond length of B-O",bins=100)
+graphics.make_histplot(df[df["B Valence"]==-1],'Bond length of B-O', bins=100)
 
 
 #df_SELECTED = sample_set.make_selection(df,325)
@@ -68,14 +68,17 @@ df = df[df['Bond length of A-O'] > 0.1]
 #    math_model.bic_in_multinormal_model(df[df["B Valence"] == i], 'Bond length of B-O',description=f"B Valence = {str(i)}")
 #    graphics.make_histplot(df[df["B Valence"] == i],'Bond length of B-O',bins = 20,description=f"Bval = {i}")
 #    pass
-#math_model.bic_in_multinormal_model(df[df["B Valence"] == -1],
+#bic_resB = math_model.bic_in_multinormal_model(df[df["B Valence"] == -1],
 #                                    'Bond length of B-O',description=f"B Valence = {str(-1)}",
 #                                    search_range=25,giveDiff=True)
+#print(bic_resB)
+
 '''
 для каждой валентности B-O:
 bic_res_BO={-1=5,0=2,1=6,2=6,3=5,4=3,5=4}
 или списком: [5,2,6,6,5,3,4]
 '''
+
 #bic_res_BO={-1:5,
 #            0 :2,
 #            1 :6,
