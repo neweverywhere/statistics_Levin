@@ -16,7 +16,7 @@ def do_EDA(df:pd.DataFrame):
     print("===="*20)
     df.info()
 
-def EDA_one_param(data_frDF:pd.DataFrame, param:str,*, description:str= ""):
+def EDA_one_param(data_frDF:pd.DataFrame, param:str,*, description:str= "", round_num:int = 2, output_round_num:int = 2):
     df = data_frDF[param].copy()
     print("\n"*2)
     print("===="*20)
@@ -27,23 +27,23 @@ def EDA_one_param(data_frDF:pd.DataFrame, param:str,*, description:str= ""):
     summary = {}
     summary["name"] =         param
     summary["amount"] =       df.count()
-    summary["mean"] =         round(df.mean(),2)
-    summary["min_value"] =    round(df.min(),2)
-    summary["max_value"] =    round(df.max(),2)
-    summary["std"] =          round(df.std(),2)
-    summary["25% quantile"] = round(df.quantile(0.25),2)
-    summary["50% quantile"] = round(df.quantile(0.5),2)
-    summary["75% quantile"] = round(df.quantile(0.75),2)
-    summary["95% quantile"] = round(df.quantile(0.95),2)
-    print("Количество:".ljust(25," "),              summary["amount"]        )
-    print("Среднее:".ljust(25," "),                 summary["mean"]          )
-    print("Минимум:".ljust(25," "),                 summary["min_value"]     )
-    print("Максимум:".ljust(25," "),                summary["max_value"]     )
-    print("Стандартное отклонение:".ljust(25," "),  summary["std"]           )
-    print("25-й перцентиль:".ljust(25," "),         summary["25% quantile"]  )
-    print("50-й перцентиль:".ljust(25," "),         summary["50% quantile"]  )
-    print("75-й перцентиль:".ljust(25," "),         summary["75% quantile"]  )
-    print("95-й перцентиль:".ljust(25," "),         summary["95% quantile"]  )
+    summary["mean"] =         round(df.mean(),          round_num)
+    summary["min_value"] =    round(df.min(),           round_num)
+    summary["max_value"] =    round(df.max(),           round_num)
+    summary["std"] =          round(df.std(),           round_num)
+    summary["25% quantile"] = round(df.quantile(0.25),  round_num)
+    summary["50% quantile"] = round(df.quantile(0.5),   round_num)
+    summary["75% quantile"] = round(df.quantile(0.75),  round_num)
+    summary["95% quantile"] = round(df.quantile(0.95),  round_num)
+    print("Количество:".ljust(25," "),              str(round(summary["amount"]        ,output_round_num  )))
+    print("Среднее:".ljust(25," "),                 str(round(summary["mean"]          ,output_round_num  )))
+    print("Минимум:".ljust(25," "),                 str(round(summary["min_value"]     ,output_round_num  )))
+    print("Максимум:".ljust(25," "),                str(round(summary["max_value"]     ,output_round_num  )))
+    print("Стандартное отклонение:".ljust(25," "),  str(round(summary["std"]           ,output_round_num  )))
+    print("25-й перцентиль:".ljust(25," "),         str(round(summary["25% quantile"]  ,output_round_num  )))
+    print("50-й перцентиль:".ljust(25," "),         str(round(summary["50% quantile"]  ,output_round_num  )))
+    print("75-й перцентиль:".ljust(25," "),         str(round(summary["75% quantile"]  ,output_round_num  )))
+    print("95-й перцентиль:".ljust(25," "),         str(round(summary["95% quantile"]  ,output_round_num  )))
     #тут попробуем оценить насколько перцентили в процентах от максимального разброса значений отстоят друг от друга
     print(f"25-й перцентиль и 50-й перцентили отстоят друг от друга на "
           + str(round((summary["25% quantile"]-summary["50% quantile"])/(df.min()-df.max())*100,1)).rjust(4,"0") + "% от всей длины отрезка")
@@ -73,10 +73,15 @@ def compare_EDAs(*, original:dict, compared:dict):
         for k in original.keys():
             if k == "name":
                 continue
-            diff = original[k] - compared[k]
+            diff = compared[k] - original[k]
+            try:
+                pct = f"{(diff / original[k]) * 100:.2f}%"
+            except ZeroDivisionError:
+                pct = "/0(!!)"
             print(f"Разница {k}:".ljust(25, " ") +
-                  f"{diff:.2f}({(diff /original[k] )*100:.2f}%)".ljust(20, " ")+
+                  f"{diff:.2f}({pct}%)".ljust(20, " ")+
                   f"(исходное/новое):({original[k]}/{compared[k]})")
+
 
 
     else:
