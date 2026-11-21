@@ -19,12 +19,13 @@ def do_EDA(df:pd.DataFrame):
 def EDA_one_param(data_frDF:pd.DataFrame, param:str,*,
                   shut_print:bool = False,shut_graphics:bool = False, description:str= "", round_num:int = 2, output_round_num:int = 2):
     df = data_frDF[param].copy()
-    print("\n"*2)
-    print("===="*20)
-    print(f" начинаем анализ по {param} ".center(80,"="))
-    if description != "": print(description.center(80, "="))
-    print("===="*20+"\n")
-    df.info()
+    if not shut_print:
+        print("\n"*2)
+        print("===="*20)
+        print(f" начинаем анализ по {param} ".center(80,"="))
+        if description != "": print(description.center(80, "="))
+        print("===="*20+"\n")
+        df.info()
     summary = {}
     summary["name"] =         param
     summary["amount"] =       df.count()
@@ -86,7 +87,7 @@ def compare_EDAs(*, original:dict, compared:dict):
             except ZeroDivisionError:
                 pct = "/0(!!)"
             print(f"Разница {k}:".ljust(25, " ") +
-                  f"{diff:.2f}({pct}    )".ljust(20, " ")+
+                  f"{diff:.2f}({pct})".ljust(20, " ")+
                   f"(исходное/новое):({original[k]}/{compared[k]})")
 
 
