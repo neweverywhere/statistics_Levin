@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from scipy import stats
+
 
 def make_histplot(data_frDF:pd.DataFrame, x_name:str, *, description:str= "",bins:int = 10,figsize:tuple=(4,4), **kwargs):
     fig, axes = plt.subplots(figsize=figsize)
@@ -44,4 +46,23 @@ def common_plt(data_frDF:pd.DataFrame, x_name:str, *,figsize:tuple=(4,4), descri
     axes.set_ylabel(x_name)
 
     plt.tight_layout()
+    plt.show()
+
+def lognorm_graph(df_local:pd.DataFrame, param:str,*,figsizz:tuple=(10,6), bins:int = 100,X_rng:tuple = (0,50), description:str = "",Floc:float = -0.15):
+    x = df_local[param].dropna().values
+    shape, loc, scale = stats.lognorm.fit(x, floc=Floc)
+
+    # График
+    fig, ax = plt.subplots(figsize=figsizz)
+    ax.hist(x, bins=bins, density=True, alpha=0.6, edgecolor='black', label='Данные')
+
+    # Теоретическая кривая
+    xs = np.linspace(0, x.max(), 500)
+    ax.plot(xs, stats.lognorm.pdf(xs, shape, loc, scale), 'r-', linewidth=2, label='Логнормальное')
+
+    ax.set_xlim(X_rng)
+    ax.set_xlabel(param+' (г на 100 г)')
+    ax.set_ylabel('Плотность')
+    (ax.set_title(description)) if description != ""  else ax.set_title(f'Гистограмма {param} + логнормальная плотность')
+    ax.legend()
     plt.show()

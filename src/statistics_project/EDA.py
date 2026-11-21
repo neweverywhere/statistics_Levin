@@ -16,7 +16,8 @@ def do_EDA(df:pd.DataFrame):
     print("===="*20)
     df.info()
 
-def EDA_one_param(data_frDF:pd.DataFrame, param:str,*, description:str= "", round_num:int = 2, output_round_num:int = 2):
+def EDA_one_param(data_frDF:pd.DataFrame, param:str,*,
+                  shut_print:bool = False,shut_graphics:bool = False, description:str= "", round_num:int = 2, output_round_num:int = 2):
     df = data_frDF[param].copy()
     print("\n"*2)
     print("===="*20)
@@ -35,24 +36,30 @@ def EDA_one_param(data_frDF:pd.DataFrame, param:str,*, description:str= "", roun
     summary["50% quantile"] = round(df.quantile(0.5),   round_num)
     summary["75% quantile"] = round(df.quantile(0.75),  round_num)
     summary["95% quantile"] = round(df.quantile(0.95),  round_num)
-    print("Количество:".ljust(25," "),              str(round(summary["amount"]        ,output_round_num  )))
-    print("Среднее:".ljust(25," "),                 str(round(summary["mean"]          ,output_round_num  )))
-    print("Минимум:".ljust(25," "),                 str(round(summary["min_value"]     ,output_round_num  )))
-    print("Максимум:".ljust(25," "),                str(round(summary["max_value"]     ,output_round_num  )))
-    print("Стандартное отклонение:".ljust(25," "),  str(round(summary["std"]           ,output_round_num  )))
-    print("25-й перцентиль:".ljust(25," "),         str(round(summary["25% quantile"]  ,output_round_num  )))
-    print("50-й перцентиль:".ljust(25," "),         str(round(summary["50% quantile"]  ,output_round_num  )))
-    print("75-й перцентиль:".ljust(25," "),         str(round(summary["75% quantile"]  ,output_round_num  )))
-    print("95-й перцентиль:".ljust(25," "),         str(round(summary["95% quantile"]  ,output_round_num  )))
-    #тут попробуем оценить насколько перцентили в процентах от максимального разброса значений отстоят друг от друга
-    print(f"25-й перцентиль и 50-й перцентили отстоят друг от друга на "
-          + str(round((summary["25% quantile"]-summary["50% quantile"])/(df.min()-df.max())*100,1)).rjust(4,"0") + "% от всей длины отрезка")
-    print(f"50-й перцентиль и 75-й перцентили отстоят друг от друга на "
-          + str(round((summary["50% quantile"]-summary["75% quantile"])/(df.min()-df.max())*100,1)).rjust(4,"0") + "% от всей длины отрезка")
-    print(f"75-й перцентиль и 95-й перцентили отстоят друг от друга на "
-          + str(round((summary["75% quantile"]-summary["95% quantile"])/(df.min()-df.max())*100,1)).rjust(4,"0") + "% от всей длины отрезка")
-    graphics.make_histplot(data_frDF,param,first = summary["25% quantile"],second = summary["50% quantile"]
-                           , third = summary["75% quantile"], fourth = summary["95% quantile"],description = description)
+    if shut_print:
+        pass
+    else:
+        print("Количество:".ljust(25," "),              str(round(summary["amount"]        ,output_round_num  )))
+        print("Среднее:".ljust(25," "),                 str(round(summary["mean"]          ,output_round_num  )))
+        print("Минимум:".ljust(25," "),                 str(round(summary["min_value"]     ,output_round_num  )))
+        print("Максимум:".ljust(25," "),                str(round(summary["max_value"]     ,output_round_num  )))
+        print("Стандартное отклонение:".ljust(25," "),  str(round(summary["std"]           ,output_round_num  )))
+        print("25-й перцентиль:".ljust(25," "),         str(round(summary["25% quantile"]  ,output_round_num  )))
+        print("50-й перцентиль:".ljust(25," "),         str(round(summary["50% quantile"]  ,output_round_num  )))
+        print("75-й перцентиль:".ljust(25," "),         str(round(summary["75% quantile"]  ,output_round_num  )))
+        print("95-й перцентиль:".ljust(25," "),         str(round(summary["95% quantile"]  ,output_round_num  )))
+        #тут попробуем оценить насколько перцентили в процентах от максимального разброса значений отстоят друг от друга
+        print(f"25-й перцентиль и 50-й перцентили отстоят друг от друга на "
+              + str(round((summary["25% quantile"]-summary["50% quantile"])/(df.min()-df.max())*100,1)).rjust(4,"0") + "% от всей длины отрезка")
+        print(f"50-й перцентиль и 75-й перцентили отстоят друг от друга на "
+              + str(round((summary["50% quantile"]-summary["75% quantile"])/(df.min()-df.max())*100,1)).rjust(4,"0") + "% от всей длины отрезка")
+        print(f"75-й перцентиль и 95-й перцентили отстоят друг от друга на "
+              + str(round((summary["75% quantile"]-summary["95% quantile"])/(df.min()-df.max())*100,1)).rjust(4,"0") + "% от всей длины отрезка")
+    if shut_graphics:
+        pass
+    else:
+        graphics.make_histplot(data_frDF,param,first = summary["25% quantile"],second = summary["50% quantile"]
+                               , third = summary["75% quantile"], fourth = summary["95% quantile"],description = description)
     #graphics.common_plt(data_frDF,param)
     return summary
 '''
@@ -79,7 +86,7 @@ def compare_EDAs(*, original:dict, compared:dict):
             except ZeroDivisionError:
                 pct = "/0(!!)"
             print(f"Разница {k}:".ljust(25, " ") +
-                  f"{diff:.2f}({pct}%)".ljust(20, " ")+
+                  f"{diff:.2f}({pct}    )".ljust(20, " ")+
                   f"(исходное/новое):({original[k]}/{compared[k]})")
 
 
